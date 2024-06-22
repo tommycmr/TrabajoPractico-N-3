@@ -1,26 +1,40 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Inicia Sesión</title>
     <link rel="stylesheet" href="../static/css/style.css">
 </head>
+
 <body>
     <div class="container">
         <div class="formulario">
-            <h1>Sing In</h1>
-            <form method="post">
+            <h1>Sign In</h1>
+
+            <!-- Mostrar mensajes flash -->
+            {% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+            <ul>
+                {% for category, message in messages %}
+                <li class="{{ category }}">{{ message }}</li>
+                {% endfor %}
+            </ul>
+            {% endif %}
+            {% endwith %}
+
+            <form action="/login" method="POST">
                 <div class="input-group">
-                    <input type="email" id="email" required>
-                    <label for="email">Email</label>
+                    <input type="text" id="username" name="username" required>
+                    <label for="username">Username</label>
                 </div>
                 <div class="input-group">
-                    <input type="password" id="password" required>
+                    <input type="password" id="password" name="password" required>
                     <label for="password">Password</label>
                 </div>
                 <div class="remember-me">
-                    <input type="checkbox" id="remember">
+                    <input type="checkbox" id="remember" name="remember">
                     <label for="remember">Remember me</label>
                 </div>
                 <input type="submit" value="Log In">
@@ -29,4 +43,5 @@
         </div>
     </div>
 </body>
+
 </html>
